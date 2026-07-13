@@ -1,68 +1,143 @@
 # 🏗️ Atlas Distribuidora Analytics
 
-> Projeto completo de Engenharia de Dados, Banco de Dados, Business Intelligence e Análise de Dados, desenvolvido para simular o ambiente de uma distribuidora de materiais de construção.
+> Um ecossistema completo de Dados desenvolvido para simular a operação de uma distribuidora de materiais de construção.
 
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-blue)
-![SQL](https://img.shields.io/badge/SQL-MySQL-orange)
-![PowerBI](https://img.shields.io/badge/Power%20BI-BI-yellow)
-![Python](https://img.shields.io/badge/Python-Data%20Analytics-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-blue)
+![MySQL](https://img.shields.io/badge/MySQL-Database-orange)
+![PowerBI](https://img.shields.io/badge/Power%20BI-Business%20Intelligence-yellow)
+![Python](https://img.shields.io/badge/Python-Data%20Analysis-blue)
+![GitHub](https://img.shields.io/badge/GitHub-Portfólio-black)
 
 ---
 
 ## 📖 Sobre o Projeto
 
-A Atlas Distribuidora Analytics é uma empresa fictícia criada para simular um ambiente corporativo real de análise de dados.
+A Atlas Distribuidora Analytics é um projeto de portfólio desenvolvido para demonstrar competências em Engenharia de Dados, Banco de Dados, Business Intelligence e Análise de Dados.
 
-O objetivo é desenvolver uma solução completa que percorra todas as etapas do ciclo de dados:
+O projeto simula a operação de uma distribuidora de materiais para construção civil, reproduzindo desafios reais encontrados em ambientes corporativos.
+
+Todo o ecossistema foi planejado para representar o ciclo completo dos dados:
 
 - Modelagem de Banco de Dados
-- SQL
 - Engenharia de Dados
+- SQL
 - Business Intelligence
 - Power BI
 - Python
 - Documentação Técnica
+- Git e GitHub
 
-Todos os dados utilizados são fictícios.
-
----
-
-## 🎯 Objetivos
-
-- Construir um banco de dados relacional em MySQL
-- Gerar dados consistentes
-- Desenvolver consultas SQL
-- Criar dashboards em Power BI
-- Realizar análises em Python
-- Publicar todo o processo no GitHub
+> **Importante:** Todos os dados utilizados neste projeto são fictícios e foram criados exclusivamente para fins educacionais.
 
 ---
 
-## 🚧 Roadmap
+# 🎯 Objetivos
 
-- [x] Planejamento do projeto
-- [ ] Requisitos de negócio
-- [ ] Regras de negócio
-- [ ] Modelagem conceitual
+Este projeto busca responder perguntas estratégicas do negócio, como:
+
+- Qual o faturamento da empresa?
+- Quais representantes apresentam melhor desempenho?
+- Quais clientes concentram maior parte da receita?
+- Quais categorias geram maior faturamento?
+- Quais produtos possuem maior giro?
+- Como está o desempenho por região?
+- A empresa está atingindo suas metas comerciais?
+
+---
+
+# 🏗 Arquitetura do Projeto
+
+```text
+                    Atlas Distribuidora
+                           │
+          ┌────────────────┼────────────────┐
+          │                │                │
+     Banco MySQL      Power BI        Python
+          │                │                │
+      Consultas SQL     Dashboard     Análises
+          │
+          └──────────── GitHub Portfolio
+```
+
+---
+
+# 🚀 Roadmap
+
+## Sprint 1
+
+- [x] Planejamento
+- [x] Visão do Projeto
+- [ ] Requisitos de Negócio
+- [ ] Regras de Negócio
+
+## Sprint 2
+
+- [ ] Modelagem Conceitual
 - [ ] DER
+- [ ] Modelo Relacional
+
+## Sprint 3
+
 - [ ] Banco MySQL
-- [ ] Dados fictícios
-- [ ] SQL
+- [ ] Scripts SQL
+- [ ] Dados Fictícios
+
+## Sprint 4
+
 - [ ] Dashboard Power BI
-- [ ] Python Analytics
-- [ ] Site do Portfólio
+- [ ] Modelo Dimensional
+- [ ] KPIs
+
+## Sprint 5
+
+- [ ] Análise em Python
+- [ ] Storytelling com Dados
+- [ ] Publicação Final
 
 ---
 
-## 📂 Documentação
+# 🛠 Tecnologias
 
-Em breve a documentação estará disponível na pasta `docs`.
+| Categoria | Tecnologias |
+|-----------|-------------|
+| Banco de Dados | MySQL |
+| Linguagem | SQL |
+| BI | Power BI |
+| ETL | Power Query |
+| Análise | Python |
+| Bibliotecas | Pandas, Matplotlib |
+| Versionamento | Git |
+| Repositório | GitHub |
 
 ---
 
-## 👨‍💻 Autor
+# 📂 Estrutura do Projeto
+
+```text
+atlas-distribuidora-analytics/
+│
+├── docs/
+├── database/
+├── sql/
+├── datasets/
+├── powerbi/
+├── python/
+└── assets/
+```
+
+---
+
+# 📚 Documentação
+
+A documentação completa será desenvolvida ao longo do projeto e ficará disponível na pasta `docs`.
+
+---
+
+# 👨‍💻 Autor
 
 **Pedro Nascimento**
 
-GitHub: https://github.com/pedronascimento-data
+Estudante de Gestão de Tecnologia da Informação e Desenvolvimento de Software.
+
+GitHub:
+https://github.com/pedronascimento-data
