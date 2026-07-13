@@ -114,15 +114,22 @@ Este projeto busca responder perguntas estratégicas do negócio, como:
 # 📂 Estrutura do Projeto
 
 ```text
-atlas-distribuidora-analytics/
+docs/
 │
-├── docs/
-├── database/
-├── sql/
-├── datasets/
-├── powerbi/
-├── python/
-└── assets/
+├── negocio/
+│   ├── 01-visao-do-projeto.md
+│   ├── 02-requisitos-de-negocio.md
+│   ├── 03-regras-de-negocio.md
+│
+├── arquitetura/
+│   ├── arquitetura-da-solucao.md
+│   ├── modelo-dimensional.md
+│
+├── banco/
+│   ├── dicionario-de-dados.md
+│   ├── modelo-logico.md
+│
+└── imagens/
 ```
 
 ---
