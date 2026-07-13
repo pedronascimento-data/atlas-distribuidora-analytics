@@ -9,7 +9,13 @@
 ![GitHub](https://img.shields.io/badge/GitHub-Portfólio-black)
 
 ---
-
+┌───────────────────────────────────────────────┐
+│                                               │
+│        Atlas Distribuidora Analytics          │
+│                                               │
+│   Engenharia de Dados • SQL • BI • Python     │
+│                                               │
+└───────────────────────────────────────────────┘
 ## 📖 Sobre o Projeto
 
 A Atlas Distribuidora Analytics é um projeto de portfólio desenvolvido para demonstrar competências em Engenharia de Dados, Banco de Dados, Business Intelligence e Análise de Dados.
