@@ -114,7 +114,6 @@ Este projeto busca responder perguntas estratégicas do negócio, como:
 # 📂 Estrutura do Projeto
 
 ```text
-docs/
 │
 ├── negocio/
 │   ├── 01-visao-do-projeto.md
