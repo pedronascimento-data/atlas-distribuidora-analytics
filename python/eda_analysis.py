@@ -94,7 +94,7 @@ def main() -> None:
     item = load_table(data_dir, "pedido_item")
     cliente = load_table(data_dir, "cliente")
     produto = load_table(data_dir, "produto")
-    categoria = load_table(data_dir, "categoria")
+    categoria_dim = load_table(data_dir, "categoria")
     representante = load_table(data_dir, "representante")
     supervisor = load_table(data_dir, "supervisor")
     meta = load_table(data_dir, "meta_representante", parse_dates=["competencia"])
@@ -224,7 +224,7 @@ def main() -> None:
     categorias["participacao"] = (
         categorias["faturamento"] / categorias["faturamento"].sum()
     )
-    categorias.to_csv(tables_dir / "performance_categorias.csv", index=False)
+    performance_categorias.to_csv(tables_dir / "performance_categorias.csv", index=False)
 
     save_bar(
         categorias,
@@ -462,7 +462,7 @@ def main() -> None:
     # --------------------------------------------------------
 
     melhor_mes = mensal.loc[mensal["faturamento"].idxmax()]
-    melhor_categoria = categorias.iloc[0]
+    melhor_categoria = performance_categorias.iloc[0]
     top_cliente = clientes.iloc[0]
     top_rep = performance_rep.iloc[0]
 
