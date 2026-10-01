@@ -10,22 +10,16 @@ Tornar o projeto reproduzível do início ao fim:
 
 1. criar o banco operacional;
 2. gerar dados sintéticos;
-3. carregar os dados no MySQL;
-4. criar a camada dimensional;
-5. executar o ETL;
-6. reconciliar os resultados.
+3. validar a massa gerada;
+4. carregar os dados no MySQL;
+5. criar a camada dimensional;
+6. executar o ETL;
+7. reconciliar origem e destino.
 
 ## 2. Preparação do ambiente
 
-Crie um ambiente virtual:
-
 ```bash
 python -m venv .venv
-```
-
-Ative o ambiente e instale as dependências:
-
-```bash
 pip install -r requirements.txt
 ```
 
@@ -35,24 +29,23 @@ Execute no MySQL:
 
 ```text
 sql/01_schema_operacional.sql
-sql/02_views_analiticas.sql
 ```
 
-## 4. Gerar dados sintéticos
+## 4. Gerar os dados sintéticos
 
-Para desenvolvimento:
+Desenvolvimento:
 
 ```bash
 python python/generate_mock_data.py --scale small
 ```
 
-Para a demonstração principal do portfólio:
+Portfólio:
 
 ```bash
 python python/generate_mock_data.py --scale portfolio
 ```
 
-Para aproximar o volume descrito no manual da empresa:
+Volume ampliado:
 
 ```bash
 python python/generate_mock_data.py --scale full
@@ -60,9 +53,28 @@ python python/generate_mock_data.py --scale full
 
 Os dados são gravados em `data/generated/`.
 
-## 5. Carregar o banco operacional
+## 5. Validar os CSVs
 
-Configure as variáveis de ambiente de acesso ao MySQL.
+Antes de inserir qualquer dado no banco:
+
+```bash
+python python/validate_generated_data.py
+```
+
+O script verifica, entre outros pontos:
+
+- referências entre tabelas;
+- unicidade de estoque por filial/produto;
+- unicidade de meta por representante/mês;
+- preços, custos e quantidades;
+- datas de faturamento;
+- reconciliação entre desconto do pedido e desconto dos itens.
+
+Uma falha encerra o processo com código de erro diferente de zero.
+
+## 6. Carregar o banco operacional
+
+Configure as variáveis de ambiente.
 
 ### Windows PowerShell
 
@@ -74,66 +86,70 @@ $env:MYSQL_PASSWORD="sua_senha"
 $env:MYSQL_DATABASE="atlas_distribuidora"
 ```
 
-Depois execute:
+Execute:
 
 ```bash
 python python/load_operational.py --truncate
 ```
 
-A opção `--truncate` limpa as tabelas antes da nova carga.
+A opção `--truncate` permite repetir a carga do zero.
 
-## 6. Criar o Data Warehouse
+## 7. Criar as views analíticas
 
-Execute:
+```text
+sql/02_views_analiticas.sql
+```
+
+As views centralizam regras recorrentes como faturamento, margem, metas, estoque crítico e inatividade.
+
+## 8. Criar o Data Warehouse
 
 ```text
 sql/04_schema_dimensional.sql
 ```
 
-Isso cria o banco `atlas_dw` com dimensões e fatos em esquema estrela.
+O banco `atlas_dw` é separado da camada operacional e contém dimensões e fatos em esquema estrela.
 
-## 7. Executar o ETL
-
-Execute:
+## 9. Executar o ETL
 
 ```text
 sql/05_etl_dimensional.sql
 ```
 
-A carga realiza:
+O ETL realiza:
 
-- criação da dimensão calendário;
-- desnormalização dos atributos de clientes;
-- desnormalização de produto/categoria/marca/fornecedor;
+- carga da dimensão calendário;
+- cliente com geografia;
+- produto com categoria, marca e fornecedor;
 - hierarquia representante → supervisor → gerente;
 - filial com geografia;
-- carga da fato de vendas;
-- carga de metas;
+- fato de vendas;
+- fato de metas;
 - snapshot de estoque.
 
-## 8. Validar o pipeline
-
-Execute:
+## 10. Validar origem x destino
 
 ```text
 sql/06_validacoes_pipeline.sql
 ```
 
-As validações verificam:
+As consultas verificam:
 
-- igualdade de contagem entre origem e destino;
+- quantidade de linhas de vendas;
 - reconciliação do faturamento;
 - reconciliação das metas;
 - duplicidades em dimensões;
-- integridade dimensional;
-- quantidades, custos e vendas inválidas.
+- integridade das chaves dimensionais;
+- métricas inválidas.
 
-## 9. Ordem completa
+## 11. Ordem completa
 
 ```text
 01_schema_operacional.sql
         ↓
 generate_mock_data.py
+        ↓
+validate_generated_data.py
         ↓
 load_operational.py
         ↓
@@ -148,29 +164,37 @@ load_operational.py
 Power BI
 ```
 
-## 10. Decisões de engenharia
+## 12. Decisões de engenharia
 
-### CSVs fora do Git
+### Dados reproduzíveis
 
-Os datasets são reconstruíveis e podem ser grandes. O repositório versiona o código que os produz, não a saída.
+O repositório armazena o código gerador, não milhares de linhas de dados derivados.
 
 ### Semente fixa
 
-A geração utiliza uma semente determinística para tornar testes e comparações reproduzíveis.
+`SEED = 42` permite reproduzir a mesma massa usando os mesmos parâmetros.
 
-### Separação OLTP e DW
+### Escala configurável
 
-Os bancos `atlas_distribuidora` e `atlas_dw` possuem responsabilidades diferentes e não são tratados como um único modelo.
+O mesmo código atende teste rápido, demonstração e um cenário de maior volume.
 
-### Reconciliação antes do dashboard
+### Separação OLTP x DW
 
-O Power BI só deve consumir a camada analítica após as validações de integridade e faturamento.
+`atlas_distribuidora` representa a operação; `atlas_dw` representa a camada analítica.
 
-## 11. Próxima etapa
+### Qualidade antes e depois da carga
 
-Com a base pronta, o próximo estágio do projeto é:
+Há validação antes da persistência e reconciliação depois do ETL.
+
+### Credenciais fora do código
+
+Informações de conexão são lidas de variáveis de ambiente e não são versionadas.
+
+## 13. Próxima etapa
+
+A base passa a estar pronta para:
 
 - análise exploratória em Python/Pandas;
 - definição das medidas DAX;
 - construção do dashboard no Power BI;
-- documentação dos insights.
+- documentação dos insights executivos.
