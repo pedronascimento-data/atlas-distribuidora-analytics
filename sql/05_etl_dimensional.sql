@@ -25,6 +25,7 @@ INSERT INTO atlas_dw.dim_data (
     trimestre,
     ano,
     ano_mes,
+    ano_mes_ordem,
     dia_semana,
     nome_dia_semana,
     fim_de_semana
@@ -58,6 +59,7 @@ SELECT
     QUARTER(data_completa),
     YEAR(data_completa),
     DATE_FORMAT(data_completa, '%Y-%m'),
+    YEAR(data_completa) * 100 + MONTH(data_completa),
     DAYOFWEEK(data_completa),
     CASE DAYOFWEEK(data_completa)
         WHEN 1 THEN 'Domingo'
