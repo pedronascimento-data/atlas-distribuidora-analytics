@@ -1,0 +1,86 @@
+table dim_data
+	dataCategory: Time
+
+	column data_key
+		dataType: int64
+		isHidden
+		isKey
+		summarizeBy: none
+		sourceColumn: data_key
+
+	column data_completa
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		summarizeBy: none
+		sourceColumn: data_completa
+
+	column dia
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: dia
+
+	column mes
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: mes
+
+	column nome_mes
+		dataType: string
+		summarizeBy: none
+		sourceColumn: nome_mes
+
+	column trimestre
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: trimestre
+
+	column ano
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: ano
+
+	column ano_mes
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ano_mes
+		sortByColumn: ano_mes_ordem
+
+	column ano_mes_ordem
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: ano_mes_ordem
+
+	column dia_semana
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: dia_semana
+
+	column nome_dia_semana
+		dataType: string
+		summarizeBy: none
+		sourceColumn: nome_dia_semana
+
+	column fim_de_semana
+		dataType: boolean
+		summarizeBy: none
+		sourceColumn: fim_de_semana
+
+	hierarchy Calendario
+		level Ano
+			column: ano
+		level Trimestre
+			column: trimestre
+		level Mes
+			column: nome_mes
+		level Data
+			column: data_completa
+
+	partition dim_data = m
+		mode: import
+		source =
+			let
+				Source = MySQL.Database(#"Server", #"Database", [Query="SELECT * FROM dim_data"])
+			in
+				Source
