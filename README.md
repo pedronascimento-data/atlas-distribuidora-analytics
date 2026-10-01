@@ -139,6 +139,16 @@ Os dados são reproduzíveis e podem ser gerados em três escalas:
 | [05_etl_dimensional.sql](sql/05_etl_dimensional.sql) | Carregar dimensões e fatos |
 | [06_validacoes_pipeline.sql](sql/06_validacoes_pipeline.sql) | Reconciliar origem e DW |
 
+## Power BI
+
+A camada de BI já possui especificação funcional e medidas iniciais versionadas:
+
+- [Especificação do Dashboard](docs/bi/01-especificacao-dashboard-powerbi.md)
+- [Medidas DAX](powerbi/medidas.dax)
+- [Pasta Power BI](powerbi/README.md)
+
+O dashboard foi planejado em cinco páginas: **Visão Executiva, Performance Comercial, Clientes, Produtos e Categorias, e Estoque**. O arquivo `.pbix` ainda está em desenvolvimento.
+
 ## Modelo dimensional
 
 ### Dimensões
@@ -204,8 +214,9 @@ Depois, no MySQL:
 - [x] ETL / carga dimensional
 - [x] Validações e reconciliação do pipeline
 - [ ] Análise exploratória em Python
-- [ ] Medidas DAX documentadas
-- [ ] Dashboard Power BI
+- [x] Especificação do dashboard Power BI
+- [x] Medidas DAX documentadas
+- [ ] Arquivo e páginas do dashboard Power BI
 - [ ] Apresentação executiva dos insights
 
 ## Competências demonstradas
