@@ -151,7 +151,12 @@ O script automatizado gera KPIs, evolução mensal, concentração de clientes, 
 
 ## Power BI
 
-A camada de BI já possui especificação funcional e medidas iniciais versionadas:
+O projeto agora também possui um **Power BI Project (PBIP)** versionável, com modelo semântico em TMDL e estrutura do relatório em PBIR.
+
+- [Abrir estrutura PBIP](powerbi/pbip/)
+- [Power BI como código](docs/bi/05-pbip-versionamento.md)
+
+A camada de BI possui especificação funcional e medidas versionadas:
 
 - [Especificação do Dashboard](docs/bi/01-especificacao-dashboard-powerbi.md)
 - [Guia de construção visual](docs/bi/02-guia-construcao-dashboard.md)
@@ -231,7 +236,8 @@ Depois, no MySQL:
 - [x] Especificação do dashboard Power BI
 - [x] Medidas DAX documentadas
 - [x] Tema, layout e configuração do modelo Power BI
-- [ ] Arquivo e páginas do dashboard Power BI
+- [x] Scaffold PBIP/TMDL/PBIR versionável
+- [ ] Visuais e validação final no Power BI Desktop
 - [ ] Apresentação executiva dos insights
 
 ## Competências demonstradas
