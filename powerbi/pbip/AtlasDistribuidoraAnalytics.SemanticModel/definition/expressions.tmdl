@@ -1,0 +1,3 @@
+expression Server = "localhost" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+
+expression Database = "atlas_dw" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
