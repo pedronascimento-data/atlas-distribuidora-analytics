@@ -79,6 +79,10 @@ table _Medidas
 		formatString: #,##0
 		displayFolder: 04 Comercial
 
+	measure 'Ranking Produto' = RANKX ( ALLSELECTED ( dim_produto[produto_key] ), [Faturamento], , DESC, DENSE )
+		formatString: #,##0
+		displayFolder: 04 Comercial
+
 	measure 'Estoque Atual' = SUM ( fato_estoque[estoque_atual] )
 		formatString: #,##0.00
 		displayFolder: 05 Estoque
@@ -100,6 +104,10 @@ table _Medidas
 		displayFolder: 06 Participação
 
 	measure 'Participação Cliente %' = DIVIDE ( [Faturamento], CALCULATE ( [Faturamento], ALLSELECTED ( dim_cliente[cliente_key] ) ) )
+		formatString: 0.0%
+		displayFolder: 06 Participação
+
+	measure 'Participação Produto %' = DIVIDE ( [Faturamento], CALCULATE ( [Faturamento], ALLSELECTED ( dim_produto[produto_key] ) ) )
 		formatString: 0.0%
 		displayFolder: 06 Participação
 

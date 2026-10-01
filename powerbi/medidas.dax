@@ -143,6 +143,15 @@ RANKX (
     DENSE
 )
 
+Ranking Produto =
+RANKX (
+    ALLSELECTED ( dim_produto[produto_key] ),
+    [Faturamento],
+    ,
+    DESC,
+    DENSE
+)
+
 // ------------------------------------------------------------
 // ESTOQUE
 // ------------------------------------------------------------
@@ -196,6 +205,15 @@ DIVIDE (
     CALCULATE (
         [Faturamento],
         ALLSELECTED ( dim_cliente[cliente_key] )
+    )
+)
+
+Participação Produto % =
+DIVIDE (
+    [Faturamento],
+    CALCULATE (
+        [Faturamento],
+        ALLSELECTED ( dim_produto[produto_key] )
     )
 )
 

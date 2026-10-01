@@ -58,7 +58,7 @@ As tabelas utilizam **Import mode** e Power Query M com `MySQL.Database`.
 1. Visão Executiva — **10 visuais PBIR**
 2. Performance Comercial — **8 visuais PBIR**
 3. Clientes — **7 visuais PBIR**
-4. Produtos e Categorias — estrutura criada
+4. Produtos e Categorias — **9 visuais PBIR**
 5. Estoque — estrutura criada
 
 ## Controle de versão
@@ -89,4 +89,13 @@ Não versionar:
 
 [Documentação](../../docs/bi/08-clientes-pbir.md)
 
-**Status geral:** 25 visuais PBIR já versionados em três páginas. Renderização e QA no Power BI Desktop ainda pendentes.
+### Produtos e Categorias
+
+- 5 cards;
+- 2 análises por categoria;
+- 1 ranking de produtos;
+- 1 tabela de mix detalhado.
+
+[Documentação](../../docs/bi/09-produtos-categorias-pbir.md)
+
+**Status geral:** 34 visuais PBIR já versionados em quatro páginas. Renderização e QA no Power BI Desktop ainda pendentes.
