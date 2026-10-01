@@ -1,0 +1,57 @@
+table dim_produto
+	column produto_key
+		dataType: int64
+		isHidden
+		isKey
+		summarizeBy: none
+		sourceColumn: produto_key
+
+	column id_produto_origem
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: id_produto_origem
+
+	column sku
+		dataType: string
+		summarizeBy: none
+		sourceColumn: sku
+
+	column produto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: produto
+
+	column categoria
+		dataType: string
+		summarizeBy: none
+		sourceColumn: categoria
+
+	column marca
+		dataType: string
+		summarizeBy: none
+		sourceColumn: marca
+
+	column fornecedor
+		dataType: string
+		summarizeBy: none
+		sourceColumn: fornecedor
+
+	column status_produto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: status_produto
+
+	hierarchy Produtos
+		level Categoria
+			column: categoria
+		level Produto
+			column: produto
+
+	partition dim_produto = m
+		mode: import
+		source =
+			let
+				Source = MySQL.Database(#"Server", #"Database", [Query="SELECT * FROM dim_produto"])
+			in
+				Source
