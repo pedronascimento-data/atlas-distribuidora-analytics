@@ -154,8 +154,12 @@ O script automatizado gera KPIs, evolução mensal, concentração de clientes, 
 A camada de BI já possui especificação funcional e medidas iniciais versionadas:
 
 - [Especificação do Dashboard](docs/bi/01-especificacao-dashboard-powerbi.md)
+- [Guia de construção visual](docs/bi/02-guia-construcao-dashboard.md)
+- [Checklist de validação](docs/bi/03-checklist-validacao-dashboard.md)
+- [Configuração do modelo semântico](docs/bi/04-configuracao-modelo-powerbi.md)
+- [Tema visual](powerbi/tema-atlas.json)
 - [Medidas DAX](powerbi/medidas.dax)
-- [Pasta Power BI](powerbi/README.md)
+- [Mapa de campos e visuais](powerbi/campos-visuais.md)
 
 O dashboard foi planejado em cinco páginas: **Visão Executiva, Performance Comercial, Clientes, Produtos e Categorias, e Estoque**. O arquivo `.pbix` ainda está em desenvolvimento.
 
@@ -226,6 +230,7 @@ Depois, no MySQL:
 - [x] Análise exploratória em Python
 - [x] Especificação do dashboard Power BI
 - [x] Medidas DAX documentadas
+- [x] Tema, layout e configuração do modelo Power BI
 - [ ] Arquivo e páginas do dashboard Power BI
 - [ ] Apresentação executiva dos insights
 
