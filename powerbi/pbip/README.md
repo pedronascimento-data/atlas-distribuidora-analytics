@@ -96,3 +96,17 @@ Arquivos locais e cache do Desktop não devem ser commitados:
 ```
 
 Depois de abrir e salvar o projeto pela primeira vez no Desktop, revise o diff gerado pelo Power BI antes de continuar a montagem visual.
+
+
+## Implementação do relatório
+
+A página **Visão Executiva** já possui 10 definições `visual.json` versionadas no PBIR:
+
+- 6 cards;
+- 1 gráfico de linha;
+- 1 gráfico de colunas;
+- 2 gráficos de barras.
+
+Consulte [Implementação PBIR — Visão Executiva](../../docs/bi/06-visao-executiva-pbir.md).
+
+**Status:** autoria PBIR concluída; renderização e QA no Power BI Desktop ainda pendentes.
