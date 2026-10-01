@@ -20,6 +20,7 @@ CREATE TABLE dim_data (
     trimestre TINYINT NOT NULL,
     ano SMALLINT NOT NULL,
     ano_mes CHAR(7) NOT NULL,
+    ano_mes_ordem INT NOT NULL,
     dia_semana TINYINT NOT NULL,
     nome_dia_semana VARCHAR(20) NOT NULL,
     fim_de_semana BOOLEAN NOT NULL
