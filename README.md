@@ -90,7 +90,16 @@ Os dados são reproduzíveis e podem ser gerados em três escalas:
 - ETL do OLTP para o DW;
 - validações de reconciliação entre origem e destino.
 
-### SQL analítico
+### Análise Exploratória
+
+A EDA está disponível em dois formatos:
+
+- [Notebook de EDA](notebooks/01_eda_atlas.ipynb) — percurso analítico legível diretamente no GitHub;
+- [Documentação da análise](docs/analises/01-analise-exploratoria.md) — perguntas, métricas, saídas e relação com o dashboard.
+
+O script automatizado gera KPIs, evolução mensal, concentração de clientes, performance de produtos/categorias, ranking comercial, atingimento de metas e diagnóstico de estoque.
+
+## SQL analítico
 
 - JOINs;
 - CTEs;
@@ -127,6 +136,7 @@ Os dados são reproduzíveis e podem ser gerados em três escalas:
 | [generate_mock_data.py](python/generate_mock_data.py) | Gerar a massa sintética |
 | [validate_generated_data.py](python/validate_generated_data.py) | Validar integridade antes da carga |
 | [load_operational.py](python/load_operational.py) | Carregar os CSVs no MySQL |
+| [eda_analysis.py](python/eda_analysis.py) | Executar EDA, gerar tabelas, gráficos e resumo |
 
 ## SQL
 
@@ -213,7 +223,7 @@ Depois, no MySQL:
 - [x] Modelo dimensional físico
 - [x] ETL / carga dimensional
 - [x] Validações e reconciliação do pipeline
-- [ ] Análise exploratória em Python
+- [x] Análise exploratória em Python
 - [x] Especificação do dashboard Power BI
 - [x] Medidas DAX documentadas
 - [ ] Arquivo e páginas do dashboard Power BI
@@ -223,7 +233,7 @@ Depois, no MySQL:
 
 - levantamento e tradução de requisitos;
 - Python aplicado a dados;
-- Pandas e NumPy;
+- Pandas, NumPy e Matplotlib;
 - SQL e MySQL;
 - modelagem relacional e dimensional;
 - ETL;
