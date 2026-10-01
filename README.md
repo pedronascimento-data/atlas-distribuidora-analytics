@@ -166,7 +166,7 @@ A camada de BI possui especificação funcional e medidas versionadas:
 - [Medidas DAX](powerbi/medidas.dax)
 - [Mapa de campos e visuais](powerbi/campos-visuais.md)
 
-O dashboard foi planejado em cinco páginas: **Visão Executiva, Performance Comercial, Clientes, Produtos e Categorias, e Estoque**. O arquivo `.pbix` ainda está em desenvolvimento.
+O dashboard possui cinco páginas materializadas em PBIR: **Visão Executiva, Performance Comercial, Clientes, Produtos e Categorias, e Estoque**. A autoria versionável está concluída; renderização e QA no Power BI Desktop ainda são necessários.
 
 ## Modelo dimensional
 
@@ -241,8 +241,9 @@ Depois, no MySQL:
 - [x] Performance Comercial em PBIR (autoria de 8 visuais)
 - [x] Clientes em PBIR (autoria de 7 visuais)
 - [x] Produtos e Categorias em PBIR (autoria de 9 visuais)
+- [x] Estoque em PBIR (autoria de 8 visuais)
+- [x] Todas as cinco páginas materializadas em PBIR
 - [ ] Validar e refinar páginas no Power BI Desktop
-- [ ] Materializar Estoque em PBIR
 - [ ] Screenshots e apresentação executiva final
 - [ ] Apresentação executiva dos insights
 

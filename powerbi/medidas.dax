@@ -186,6 +186,25 @@ CALCULATE (
     )
 )
 
+Posições Abaixo do Mínimo =
+COUNTROWS (
+    FILTER (
+        fato_estoque,
+        fato_estoque[estoque_atual] < fato_estoque[estoque_minimo]
+    )
+)
+
+Posições Acima do Máximo =
+COUNTROWS (
+    FILTER (
+        fato_estoque,
+        fato_estoque[estoque_atual] > fato_estoque[estoque_maximo]
+    )
+)
+
+Gap para Estoque Mínimo =
+[Estoque Atual] - [Estoque Mínimo]
+
 // ------------------------------------------------------------
 // PARTICIPAÇÃO
 // ------------------------------------------------------------

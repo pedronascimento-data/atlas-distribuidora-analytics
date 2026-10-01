@@ -87,6 +87,14 @@ table _Medidas
 		formatString: #,##0.00
 		displayFolder: 05 Estoque
 
+	measure 'Estoque Mínimo' = SUM ( fato_estoque[estoque_minimo] )
+		formatString: #,##0.00
+		displayFolder: 05 Estoque
+
+	measure 'Estoque Máximo' = SUM ( fato_estoque[estoque_maximo] )
+		formatString: #,##0.00
+		displayFolder: 05 Estoque
+
 	measure 'Valor em Estoque' = SUM ( fato_estoque[valor_estoque] )
 		formatString: R$ #,##0.00
 		displayFolder: 05 Estoque
@@ -97,6 +105,18 @@ table _Medidas
 
 	measure 'Produtos Acima do Máximo' = CALCULATE ( DISTINCTCOUNT ( fato_estoque[produto_key] ), FILTER ( fato_estoque, fato_estoque[estoque_atual] > fato_estoque[estoque_maximo] ) )
 		formatString: #,##0
+		displayFolder: 05 Estoque
+
+	measure 'Posições Abaixo do Mínimo' = COUNTROWS ( FILTER ( fato_estoque, fato_estoque[estoque_atual] < fato_estoque[estoque_minimo] ) )
+		formatString: #,##0
+		displayFolder: 05 Estoque
+
+	measure 'Posições Acima do Máximo' = COUNTROWS ( FILTER ( fato_estoque, fato_estoque[estoque_atual] > fato_estoque[estoque_maximo] ) )
+		formatString: #,##0
+		displayFolder: 05 Estoque
+
+	measure 'Gap para Estoque Mínimo' = [Estoque Atual] - [Estoque Mínimo]
+		formatString: #,##0.00
 		displayFolder: 05 Estoque
 
 	measure 'Participação Categoria %' = DIVIDE ( [Faturamento], CALCULATE ( [Faturamento], ALLSELECTED ( dim_produto[categoria] ) ) )
