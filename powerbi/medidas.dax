@@ -1,0 +1,191 @@
+// ============================================================
+// ATLAS DISTRIBUIDORA ANALYTICS
+// MEDIDAS DAX — VERSÃO INICIAL
+// Modelo: atlas_dw
+// ============================================================
+
+// ------------------------------------------------------------
+// VENDAS
+// ------------------------------------------------------------
+
+Faturamento =
+SUM ( fato_vendas[faturamento_liquido] )
+
+Valor Bruto =
+SUM ( fato_vendas[valor_bruto] )
+
+Descontos =
+SUM ( fato_vendas[desconto] )
+
+Custo Total =
+SUM ( fato_vendas[custo_total] )
+
+Margem Bruta =
+SUM ( fato_vendas[margem_bruta] )
+
+Margem % =
+DIVIDE (
+    [Margem Bruta],
+    [Faturamento]
+)
+
+Quantidade Vendida =
+SUM ( fato_vendas[quantidade] )
+
+Quantidade de Pedidos =
+DISTINCTCOUNT ( fato_vendas[numero_pedido] )
+
+Ticket Médio =
+DIVIDE (
+    [Faturamento],
+    [Quantidade de Pedidos]
+)
+
+Clientes Compradores =
+DISTINCTCOUNT ( fato_vendas[cliente_key] )
+
+Preço Médio Unitário =
+DIVIDE (
+    [Faturamento],
+    [Quantidade Vendida]
+)
+
+// ------------------------------------------------------------
+// TEMPO
+// ------------------------------------------------------------
+
+Faturamento Mês Anterior =
+CALCULATE (
+    [Faturamento],
+    DATEADD (
+        dim_data[data_completa],
+        -1,
+        MONTH
+    )
+)
+
+Crescimento MoM % =
+DIVIDE (
+    [Faturamento] - [Faturamento Mês Anterior],
+    [Faturamento Mês Anterior]
+)
+
+Faturamento Ano Anterior =
+CALCULATE (
+    [Faturamento],
+    SAMEPERIODLASTYEAR (
+        dim_data[data_completa]
+    )
+)
+
+Crescimento YoY % =
+DIVIDE (
+    [Faturamento] - [Faturamento Ano Anterior],
+    [Faturamento Ano Anterior]
+)
+
+Faturamento YTD =
+TOTALYTD (
+    [Faturamento],
+    dim_data[data_completa]
+)
+
+// ------------------------------------------------------------
+// METAS
+// ------------------------------------------------------------
+
+Meta =
+SUM ( fato_metas[valor_meta] )
+
+Atingimento Meta % =
+DIVIDE (
+    [Faturamento],
+    [Meta]
+)
+
+Gap para Meta =
+[Meta] - [Faturamento]
+
+Status Meta =
+SWITCH (
+    TRUE (),
+    ISBLANK ( [Meta] ), BLANK (),
+    [Atingimento Meta %] >= 1, "Meta atingida",
+    [Atingimento Meta %] >= 0.8, "Próximo da meta",
+    "Abaixo da meta"
+)
+
+// ------------------------------------------------------------
+// COMERCIAL
+// ------------------------------------------------------------
+
+Ranking Representante =
+RANKX (
+    ALLSELECTED ( dim_representante[representante] ),
+    [Faturamento],
+    ,
+    DESC,
+    DENSE
+)
+
+Faturamento por Cliente Médio =
+DIVIDE (
+    [Faturamento],
+    [Clientes Compradores]
+)
+
+// ------------------------------------------------------------
+// ESTOQUE
+// ------------------------------------------------------------
+
+Estoque Atual =
+SUM ( fato_estoque[estoque_atual] )
+
+Estoque Mínimo =
+SUM ( fato_estoque[estoque_minimo] )
+
+Estoque Máximo =
+SUM ( fato_estoque[estoque_maximo] )
+
+Valor em Estoque =
+SUM ( fato_estoque[valor_estoque] )
+
+Produtos Abaixo do Mínimo =
+CALCULATE (
+    DISTINCTCOUNT ( fato_estoque[produto_key] ),
+    FILTER (
+        fato_estoque,
+        fato_estoque[estoque_atual] < fato_estoque[estoque_minimo]
+    )
+)
+
+Produtos Acima do Máximo =
+CALCULATE (
+    DISTINCTCOUNT ( fato_estoque[produto_key] ),
+    FILTER (
+        fato_estoque,
+        fato_estoque[estoque_atual] > fato_estoque[estoque_maximo]
+    )
+)
+
+// ------------------------------------------------------------
+// PARTICIPAÇÃO
+// ------------------------------------------------------------
+
+Participação Categoria % =
+DIVIDE (
+    [Faturamento],
+    CALCULATE (
+        [Faturamento],
+        ALLSELECTED ( dim_produto[categoria] )
+    )
+)
+
+Participação Cliente % =
+DIVIDE (
+    [Faturamento],
+    CALCULATE (
+        [Faturamento],
+        ALLSELECTED ( dim_cliente[cliente_key] )
+    )
+)
