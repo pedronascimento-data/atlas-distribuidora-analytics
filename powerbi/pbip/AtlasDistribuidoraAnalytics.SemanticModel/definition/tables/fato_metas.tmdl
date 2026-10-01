@@ -1,0 +1,39 @@
+table fato_metas
+	column meta_key
+		dataType: int64
+		isHidden
+		isKey
+		summarizeBy: none
+		sourceColumn: meta_key
+
+	column id_meta_origem
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: id_meta_origem
+
+	column data_key
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: data_key
+
+	column representante_key
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: representante_key
+
+	column valor_meta
+		dataType: decimal
+		formatString: R$ #,##0.00
+		summarizeBy: sum
+		sourceColumn: valor_meta
+
+	partition fato_metas = m
+		mode: import
+		source =
+			let
+				Source = MySQL.Database(#"Server", #"Database", [Query="SELECT * FROM fato_metas"])
+			in
+				Source
