@@ -75,6 +75,10 @@ table _Medidas
 		formatString: R$ #,##0.00
 		displayFolder: 04 Comercial
 
+	measure 'Ranking Cliente' = RANKX ( ALLSELECTED ( dim_cliente[cliente_key] ), [Faturamento], , DESC, DENSE )
+		formatString: #,##0
+		displayFolder: 04 Comercial
+
 	measure 'Estoque Atual' = SUM ( fato_estoque[estoque_atual] )
 		formatString: #,##0.00
 		displayFolder: 05 Estoque
@@ -96,6 +100,10 @@ table _Medidas
 		displayFolder: 06 Participação
 
 	measure 'Participação Cliente %' = DIVIDE ( [Faturamento], CALCULATE ( [Faturamento], ALLSELECTED ( dim_cliente[cliente_key] ) ) )
+		formatString: 0.0%
+		displayFolder: 06 Participação
+
+	measure 'Participação Top 10 Clientes %' = VAR TopClientes = TOPN ( 10, ALLSELECTED ( dim_cliente[cliente_key] ), [Faturamento], DESC ) VAR ReceitaTop10 = CALCULATE ( [Faturamento], KEEPFILTERS ( TopClientes ) ) VAR ReceitaTotal = CALCULATE ( [Faturamento], ALLSELECTED ( dim_cliente[cliente_key] ) ) RETURN DIVIDE ( ReceitaTop10, ReceitaTotal )
 		formatString: 0.0%
 		displayFolder: 06 Participação
 

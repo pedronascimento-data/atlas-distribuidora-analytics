@@ -31,28 +31,7 @@ pbip/
 
 ## Modelo já implementado
 
-O TMDL contém:
-
-- `dim_data`;
-- `dim_cliente`;
-- `dim_produto`;
-- `dim_representante`;
-- `dim_filial`;
-- `fato_vendas`;
-- `fato_metas`;
-- `fato_estoque`;
-- `_Medidas`.
-
-Também estão declarados:
-
-- relacionamentos estrela;
-- hierarquia de calendário;
-- hierarquia comercial;
-- hierarquia de produtos;
-- hierarquia geográfica;
-- medidas DAX;
-- pastas de exibição;
-- parâmetros de conexão `Server` e `Database`.
+O TMDL contém cinco dimensões, três fatos, tabela de medidas, relacionamentos estrela, hierarquias, parâmetros de conexão e medidas DAX.
 
 ## Conexão padrão
 
@@ -72,48 +51,42 @@ As tabelas utilizam **Import mode** e Power Query M com `MySQL.Database`.
 5. Atualize o modelo.
 6. Valide o faturamento contra `sql/06_validacoes_pipeline.sql`.
 7. Importe `../tema-atlas.json`.
-8. Monte/revise os visuais usando `../campos-visuais.md`.
+8. Revise os visuais usando `../campos-visuais.md`.
 
 ## Páginas
 
-As cinco páginas 1280 × 720 existem no PBIR:
-
 1. Visão Executiva — **10 visuais PBIR**
 2. Performance Comercial — **8 visuais PBIR**
-3. Clientes — estrutura criada
+3. Clientes — **7 visuais PBIR**
 4. Produtos e Categorias — estrutura criada
 5. Estoque — estrutura criada
 
 ## Controle de versão
 
-Arquivos locais e cache do Desktop não devem ser commitados:
+Não versionar:
 
 ```text
 **/.pbi/localSettings.json
 **/.pbi/cache.abf
 ```
 
-Depois de abrir e salvar o projeto pela primeira vez no Desktop, revise o diff gerado pelo Power BI antes de continuar a montagem visual.
-
 ## Implementação do relatório
 
 ### Visão Executiva
 
-- 6 cards;
-- 1 gráfico de linha;
-- 1 gráfico de colunas;
-- 2 gráficos de barras.
-
-[Documentação da Visão Executiva](../../docs/bi/06-visao-executiva-pbir.md)
+[Documentação](../../docs/bi/06-visao-executiva-pbir.md)
 
 ### Performance Comercial
 
+[Documentação](../../docs/bi/07-performance-comercial-pbir.md)
+
+### Clientes
+
 - 4 cards;
-- 1 ranking em barras;
-- 1 comparação faturamento x meta;
-- 1 evolução mensal;
-- 1 tabela detalhada da hierarquia comercial.
+- 1 ranking de clientes;
+- 1 gráfico por UF;
+- 1 tabela de carteira.
 
-[Documentação da Performance Comercial](../../docs/bi/07-performance-comercial-pbir.md)
+[Documentação](../../docs/bi/08-clientes-pbir.md)
 
-**Status geral:** autoria PBIR em andamento; renderização e QA no Power BI Desktop ainda pendentes.
+**Status geral:** 25 visuais PBIR já versionados em três páginas. Renderização e QA no Power BI Desktop ainda pendentes.

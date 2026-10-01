@@ -134,6 +134,15 @@ DIVIDE (
     [Clientes Compradores]
 )
 
+Ranking Cliente =
+RANKX (
+    ALLSELECTED ( dim_cliente[cliente_key] ),
+    [Faturamento],
+    ,
+    DESC,
+    DENSE
+)
+
 // ------------------------------------------------------------
 // ESTOQUE
 // ------------------------------------------------------------
@@ -189,3 +198,27 @@ DIVIDE (
         ALLSELECTED ( dim_cliente[cliente_key] )
     )
 )
+
+Participação Top 10 Clientes % =
+VAR TopClientes =
+    TOPN (
+        10,
+        ALLSELECTED ( dim_cliente[cliente_key] ),
+        [Faturamento],
+        DESC
+    )
+VAR ReceitaTop10 =
+    CALCULATE (
+        [Faturamento],
+        KEEPFILTERS ( TopClientes )
+    )
+VAR ReceitaTotal =
+    CALCULATE (
+        [Faturamento],
+        ALLSELECTED ( dim_cliente[cliente_key] )
+    )
+RETURN
+    DIVIDE (
+        ReceitaTop10,
+        ReceitaTotal
+    )

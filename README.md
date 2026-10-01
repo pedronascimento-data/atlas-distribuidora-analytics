@@ -239,8 +239,9 @@ Depois, no MySQL:
 - [x] Scaffold PBIP/TMDL/PBIR versionável
 - [x] Visão Executiva em PBIR (autoria de 10 visuais)
 - [x] Performance Comercial em PBIR (autoria de 8 visuais)
+- [x] Clientes em PBIR (autoria de 7 visuais)
 - [ ] Validar e refinar páginas no Power BI Desktop
-- [ ] Materializar Clientes, Produtos e Estoque em PBIR
+- [ ] Materializar Produtos e Estoque em PBIR
 - [ ] Screenshots e apresentação executiva final
 - [ ] Apresentação executiva dos insights
 
