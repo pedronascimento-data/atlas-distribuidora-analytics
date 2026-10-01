@@ -1,0 +1,110 @@
+table _Medidas
+	measure Faturamento = SUM ( fato_vendas[faturamento_liquido] )
+		formatString: R$ #,##0.00
+		displayFolder: 01 Vendas
+
+	measure 'Margem Bruta' = SUM ( fato_vendas[margem_bruta] )
+		formatString: R$ #,##0.00
+		displayFolder: 01 Vendas
+
+	measure 'Margem %' = DIVIDE ( [Margem Bruta], [Faturamento] )
+		formatString: 0.0%
+		displayFolder: 01 Vendas
+
+	measure 'Quantidade Vendida' = SUM ( fato_vendas[quantidade] )
+		formatString: #,##0.00
+		displayFolder: 01 Vendas
+
+	measure 'Quantidade de Pedidos' = DISTINCTCOUNT ( fato_vendas[numero_pedido] )
+		formatString: #,##0
+		displayFolder: 01 Vendas
+
+	measure 'Ticket Médio' = DIVIDE ( [Faturamento], [Quantidade de Pedidos] )
+		formatString: R$ #,##0.00
+		displayFolder: 01 Vendas
+
+	measure 'Clientes Compradores' = DISTINCTCOUNT ( fato_vendas[cliente_key] )
+		formatString: #,##0
+		displayFolder: 01 Vendas
+
+	measure 'Preço Médio Unitário' = DIVIDE ( [Faturamento], [Quantidade Vendida] )
+		formatString: R$ #,##0.00
+		displayFolder: 01 Vendas
+
+	measure 'Faturamento Mês Anterior' = CALCULATE ( [Faturamento], DATEADD ( dim_data[data_completa], -1, MONTH ) )
+		formatString: R$ #,##0.00
+		displayFolder: 02 Tempo
+
+	measure 'Crescimento MoM %' = DIVIDE ( [Faturamento] - [Faturamento Mês Anterior], [Faturamento Mês Anterior] )
+		formatString: 0.0%
+		displayFolder: 02 Tempo
+
+	measure 'Faturamento Ano Anterior' = CALCULATE ( [Faturamento], SAMEPERIODLASTYEAR ( dim_data[data_completa] ) )
+		formatString: R$ #,##0.00
+		displayFolder: 02 Tempo
+
+	measure 'Crescimento YoY %' = DIVIDE ( [Faturamento] - [Faturamento Ano Anterior], [Faturamento Ano Anterior] )
+		formatString: 0.0%
+		displayFolder: 02 Tempo
+
+	measure 'Faturamento YTD' = TOTALYTD ( [Faturamento], dim_data[data_completa] )
+		formatString: R$ #,##0.00
+		displayFolder: 02 Tempo
+
+	measure Meta = SUM ( fato_metas[valor_meta] )
+		formatString: R$ #,##0.00
+		displayFolder: 03 Metas
+
+	measure 'Atingimento Meta %' = DIVIDE ( [Faturamento], [Meta] )
+		formatString: 0.0%
+		displayFolder: 03 Metas
+
+	measure 'Gap para Meta' = [Meta] - [Faturamento]
+		formatString: R$ #,##0.00
+		displayFolder: 03 Metas
+
+	measure 'Status Meta' = SWITCH ( TRUE (), ISBLANK ( [Meta] ), BLANK (), [Atingimento Meta %] >= 1, "Meta atingida", [Atingimento Meta %] >= 0.8, "Próximo da meta", "Abaixo da meta" )
+		formatString: General
+		displayFolder: 03 Metas
+
+	measure 'Ranking Representante' = RANKX ( ALLSELECTED ( dim_representante[representante] ), [Faturamento], , DESC, DENSE )
+		formatString: #,##0
+		displayFolder: 04 Comercial
+
+	measure 'Faturamento por Cliente Médio' = DIVIDE ( [Faturamento], [Clientes Compradores] )
+		formatString: R$ #,##0.00
+		displayFolder: 04 Comercial
+
+	measure 'Estoque Atual' = SUM ( fato_estoque[estoque_atual] )
+		formatString: #,##0.00
+		displayFolder: 05 Estoque
+
+	measure 'Valor em Estoque' = SUM ( fato_estoque[valor_estoque] )
+		formatString: R$ #,##0.00
+		displayFolder: 05 Estoque
+
+	measure 'Produtos Abaixo do Mínimo' = CALCULATE ( DISTINCTCOUNT ( fato_estoque[produto_key] ), FILTER ( fato_estoque, fato_estoque[estoque_atual] < fato_estoque[estoque_minimo] ) )
+		formatString: #,##0
+		displayFolder: 05 Estoque
+
+	measure 'Produtos Acima do Máximo' = CALCULATE ( DISTINCTCOUNT ( fato_estoque[produto_key] ), FILTER ( fato_estoque, fato_estoque[estoque_atual] > fato_estoque[estoque_maximo] ) )
+		formatString: #,##0
+		displayFolder: 05 Estoque
+
+	measure 'Participação Categoria %' = DIVIDE ( [Faturamento], CALCULATE ( [Faturamento], ALLSELECTED ( dim_produto[categoria] ) ) )
+		formatString: 0.0%
+		displayFolder: 06 Participação
+
+	measure 'Participação Cliente %' = DIVIDE ( [Faturamento], CALCULATE ( [Faturamento], ALLSELECTED ( dim_cliente[cliente_key] ) ) )
+		formatString: 0.0%
+		displayFolder: 06 Participação
+
+	column Dummy
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: [Dummy]
+
+	partition _Medidas = calculated
+		mode: import
+		source = ROW("Dummy", BLANK())
