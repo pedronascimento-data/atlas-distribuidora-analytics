@@ -1,0 +1,51 @@
+table dim_filial
+	column filial_key
+		dataType: int64
+		isHidden
+		isKey
+		summarizeBy: none
+		sourceColumn: filial_key
+
+	column id_filial_origem
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: id_filial_origem
+
+	column codigo_filial
+		dataType: string
+		summarizeBy: none
+		sourceColumn: codigo_filial
+
+	column filial
+		dataType: string
+		summarizeBy: none
+		sourceColumn: filial
+
+	column cidade
+		dataType: string
+		summarizeBy: none
+		sourceColumn: cidade
+
+	column estado
+		dataType: string
+		summarizeBy: none
+		sourceColumn: estado
+
+	column uf
+		dataType: string
+		summarizeBy: none
+		sourceColumn: uf
+
+	column status_filial
+		dataType: string
+		summarizeBy: none
+		sourceColumn: status_filial
+
+	partition dim_filial = m
+		mode: import
+		source =
+			let
+				Source = MySQL.Database(#"Server", #"Database", [Query="SELECT * FROM dim_filial"])
+			in
+				Source
