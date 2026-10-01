@@ -237,7 +237,10 @@ Depois, no MySQL:
 - [x] Medidas DAX documentadas
 - [x] Tema, layout e configuração do modelo Power BI
 - [x] Scaffold PBIP/TMDL/PBIR versionável
-- [ ] Visuais e validação final no Power BI Desktop
+- [x] Visão Executiva em PBIR (autoria de 10 visuais)
+- [ ] Validar e refinar Visão Executiva no Power BI Desktop
+- [ ] Materializar as demais páginas em PBIR
+- [ ] Screenshots e apresentação executiva final
 - [ ] Apresentação executiva dos insights
 
 ## Competências demonstradas
