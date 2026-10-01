@@ -15,3 +15,7 @@ data/generated/*.csv
 .idea/
 .DS_Store
 Thumbs.db
+
+# Power BI Project local/cache files
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
