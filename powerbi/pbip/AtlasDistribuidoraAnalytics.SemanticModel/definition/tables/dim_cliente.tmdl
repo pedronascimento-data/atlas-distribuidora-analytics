@@ -1,0 +1,62 @@
+table dim_cliente
+	column cliente_key
+		dataType: int64
+		isHidden
+		isKey
+		summarizeBy: none
+		sourceColumn: cliente_key
+
+	column id_cliente_origem
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: id_cliente_origem
+
+	column codigo_cliente
+		dataType: string
+		summarizeBy: none
+		sourceColumn: codigo_cliente
+
+	column razao_social
+		dataType: string
+		summarizeBy: none
+		sourceColumn: razao_social
+
+	column nome_fantasia
+		dataType: string
+		summarizeBy: none
+		sourceColumn: nome_fantasia
+
+	column status_cadastral
+		dataType: string
+		summarizeBy: none
+		sourceColumn: status_cadastral
+
+	column cidade
+		dataType: string
+		summarizeBy: none
+		sourceColumn: cidade
+
+	column estado
+		dataType: string
+		summarizeBy: none
+		sourceColumn: estado
+
+	column uf
+		dataType: string
+		summarizeBy: none
+		sourceColumn: uf
+
+	hierarchy Geografia
+		level Estado
+			column: estado
+		level Cidade
+			column: cidade
+
+	partition dim_cliente = m
+		mode: import
+		source =
+			let
+				Source = MySQL.Database(#"Server", #"Database", [Query="SELECT * FROM dim_cliente"])
+			in
+				Source
