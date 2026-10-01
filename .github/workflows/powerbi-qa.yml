@@ -1,6 +1,7 @@
 name: Power BI Project QA
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - "powerbi/**"
