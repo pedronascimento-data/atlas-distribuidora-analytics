@@ -1,0 +1,39 @@
+relationship 'Vendas - Data'
+	fromColumn: fato_vendas.data_key
+	toColumn: dim_data.data_key
+
+relationship 'Vendas - Cliente'
+	fromColumn: fato_vendas.cliente_key
+	toColumn: dim_cliente.cliente_key
+
+relationship 'Vendas - Produto'
+	fromColumn: fato_vendas.produto_key
+	toColumn: dim_produto.produto_key
+
+relationship 'Vendas - Representante'
+	fromColumn: fato_vendas.representante_key
+	toColumn: dim_representante.representante_key
+
+relationship 'Vendas - Filial'
+	fromColumn: fato_vendas.filial_key
+	toColumn: dim_filial.filial_key
+
+relationship 'Metas - Data'
+	fromColumn: fato_metas.data_key
+	toColumn: dim_data.data_key
+
+relationship 'Metas - Representante'
+	fromColumn: fato_metas.representante_key
+	toColumn: dim_representante.representante_key
+
+relationship 'Estoque - Data'
+	fromColumn: fato_estoque.data_key
+	toColumn: dim_data.data_key
+
+relationship 'Estoque - Produto'
+	fromColumn: fato_estoque.produto_key
+	toColumn: dim_produto.produto_key
+
+relationship 'Estoque - Filial'
+	fromColumn: fato_estoque.filial_key
+	toColumn: dim_filial.filial_key
