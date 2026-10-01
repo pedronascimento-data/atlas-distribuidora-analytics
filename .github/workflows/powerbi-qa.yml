@@ -1,0 +1,40 @@
+name: Power BI Project QA
+
+on:
+  push:
+    paths:
+      - "powerbi/**"
+      - "python/validate_powerbi_project.py"
+      - "requirements-dev.txt"
+      - ".github/workflows/powerbi-qa.yml"
+  pull_request:
+    paths:
+      - "powerbi/**"
+      - "python/validate_powerbi_project.py"
+      - "requirements-dev.txt"
+      - ".github/workflows/powerbi-qa.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-powerbi-project:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install QA dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Compile Python sources
+        run: python -m compileall -q python
+
+      - name: Validate PBIP, PBIR and TMDL
+        run: python python/validate_powerbi_project.py --schema --strict-schema

@@ -108,3 +108,23 @@ Não versionar:
 [Documentação](../../docs/bi/10-estoque-pbir.md)
 
 **Status geral:** 42 visuais PBIR versionados nas cinco páginas planejadas. A autoria PBIR está concluída; renderização, QA e refinamento no Power BI Desktop ainda estão pendentes.
+
+
+## QA automatizado
+
+Validação estrutural local:
+
+```bash
+python python/validate_powerbi_project.py
+```
+
+Validação completa com os schemas públicos PBIR:
+
+```bash
+pip install -r requirements-dev.txt
+python python/validate_powerbi_project.py --schema --strict-schema
+```
+
+O workflow `.github/workflows/powerbi-qa.yml` executa essa validação automaticamente em alterações da camada Power BI.
+
+[Documentação de QA](../../docs/bi/11-qa-automatizado.md)

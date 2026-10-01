@@ -165,6 +165,7 @@ A camada de BI possui especificação funcional e medidas versionadas:
 - [Tema visual](powerbi/tema-atlas.json)
 - [Medidas DAX](powerbi/medidas.dax)
 - [Mapa de campos e visuais](powerbi/campos-visuais.md)
+- [QA automatizado PBIP/PBIR/TMDL](docs/bi/11-qa-automatizado.md)
 
 O dashboard possui cinco páginas materializadas em PBIR: **Visão Executiva, Performance Comercial, Clientes, Produtos e Categorias, e Estoque**. A autoria versionável está concluída; renderização e QA no Power BI Desktop ainda são necessários.
 
@@ -197,25 +198,42 @@ O projeto contém consultas para:
 
 ## Execução resumida
 
+Instale as dependências:
+
 ```bash
 pip install -r requirements.txt
+```
 
+Primeiro, no MySQL:
+
+```text
+01_schema_operacional.sql
+```
+
+Depois gere, valide e carregue os dados:
+
+```bash
 python python/generate_mock_data.py --scale portfolio
 python python/validate_generated_data.py
 python python/load_operational.py --truncate
 ```
 
-Depois, no MySQL:
+Em seguida, no MySQL:
 
 ```text
-01_schema_operacional.sql
 02_views_analiticas.sql
 04_schema_dimensional.sql
 05_etl_dimensional.sql
 06_validacoes_pipeline.sql
 ```
 
-> Consulte [Geração, Carga e ETL](docs/tecnico/05-geracao-carga-etl.md) para a ordem detalhada e configuração do ambiente.
+Por fim, a EDA pode ser regenerada com:
+
+```bash
+python python/eda_analysis.py
+```
+
+> Consulte [Geração, Carga e ETL](docs/tecnico/05-geracao-carga-etl.md) para configuração do ambiente e detalhes de cada etapa.
 
 ## Roadmap
 
@@ -243,6 +261,7 @@ Depois, no MySQL:
 - [x] Produtos e Categorias em PBIR (autoria de 9 visuais)
 - [x] Estoque em PBIR (autoria de 8 visuais)
 - [x] Todas as cinco páginas materializadas em PBIR
+- [x] QA estrutural automatizado para PBIP/PBIR/TMDL
 - [ ] Validar e refinar páginas no Power BI Desktop
 - [ ] Screenshots e apresentação executiva final
 - [ ] Apresentação executiva dos insights
