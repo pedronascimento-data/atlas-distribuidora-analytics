@@ -150,9 +150,19 @@ def schema_validator(strict: bool):
 
     cache: dict[str, Any] = {}
 
+    def schema_download_url(uri: str) -> str:
+        prefix = "https://developer.microsoft.com/json-schemas/"
+        if uri.startswith(prefix):
+            relative = uri[len(prefix):]
+            return (
+                "https://raw.githubusercontent.com/microsoft/json-schemas/"
+                "main/" + relative
+            )
+        return uri
+
     def retrieve(uri: str):
         if uri not in cache:
-            with urllib.request.urlopen(uri, timeout=20) as response:
+            with urllib.request.urlopen(schema_download_url(uri), timeout=20) as response:
                 cache[uri] = json.loads(response.read().decode("utf-8"))
         return Resource.from_contents(cache[uri])
 
@@ -167,7 +177,7 @@ def schema_validator(strict: bool):
             return
         try:
             if uri not in cache:
-                with urllib.request.urlopen(uri, timeout=20) as response:
+                with urllib.request.urlopen(schema_download_url(uri), timeout=20) as response:
                     cache[uri] = json.loads(response.read().decode("utf-8"))
             schema = cache[uri]
             cls = validator_for(schema)
