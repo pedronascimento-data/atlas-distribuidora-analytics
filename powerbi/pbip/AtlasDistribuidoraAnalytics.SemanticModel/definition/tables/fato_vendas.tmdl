@@ -1,0 +1,91 @@
+table fato_vendas
+	column venda_key
+		dataType: int64
+		isHidden
+		isKey
+		summarizeBy: none
+		sourceColumn: venda_key
+
+	column id_pedido_item_origem
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: id_pedido_item_origem
+
+	column data_key
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: data_key
+
+	column cliente_key
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: cliente_key
+
+	column produto_key
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: produto_key
+
+	column representante_key
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: representante_key
+
+	column filial_key
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: filial_key
+
+	column numero_pedido
+		dataType: string
+		summarizeBy: none
+		sourceColumn: numero_pedido
+
+	column quantidade
+		dataType: decimal
+		summarizeBy: sum
+		sourceColumn: quantidade
+
+	column valor_bruto
+		dataType: decimal
+		formatString: R$ #,##0.00
+		summarizeBy: sum
+		sourceColumn: valor_bruto
+
+	column desconto
+		dataType: decimal
+		formatString: R$ #,##0.00
+		summarizeBy: sum
+		sourceColumn: desconto
+
+	column faturamento_liquido
+		dataType: decimal
+		formatString: R$ #,##0.00
+		summarizeBy: sum
+		sourceColumn: faturamento_liquido
+
+	column custo_total
+		dataType: decimal
+		formatString: R$ #,##0.00
+		summarizeBy: sum
+		sourceColumn: custo_total
+
+	column margem_bruta
+		dataType: decimal
+		formatString: R$ #,##0.00
+		summarizeBy: sum
+		sourceColumn: margem_bruta
+
+	partition fato_vendas = m
+		mode: import
+		source =
+			let
+				Source = MySQL.Database(#"Server", #"Database", [Query="SELECT * FROM fato_vendas"])
+			in
+				Source
