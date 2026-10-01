@@ -1,0 +1,60 @@
+table fato_estoque
+	column estoque_key
+		dataType: int64
+		isHidden
+		isKey
+		summarizeBy: none
+		sourceColumn: estoque_key
+
+	column id_estoque_origem
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: id_estoque_origem
+
+	column data_key
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: data_key
+
+	column filial_key
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: filial_key
+
+	column produto_key
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: produto_key
+
+	column estoque_atual
+		dataType: decimal
+		summarizeBy: sum
+		sourceColumn: estoque_atual
+
+	column estoque_minimo
+		dataType: decimal
+		summarizeBy: sum
+		sourceColumn: estoque_minimo
+
+	column estoque_maximo
+		dataType: decimal
+		summarizeBy: sum
+		sourceColumn: estoque_maximo
+
+	column valor_estoque
+		dataType: decimal
+		formatString: R$ #,##0.00
+		summarizeBy: sum
+		sourceColumn: valor_estoque
+
+	partition fato_estoque = m
+		mode: import
+		source =
+			let
+				Source = MySQL.Database(#"Server", #"Database", [Query="SELECT * FROM fato_estoque"])
+			in
+				Source
