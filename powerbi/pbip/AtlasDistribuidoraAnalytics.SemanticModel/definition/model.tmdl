@@ -1,0 +1,15 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	discourageImplicitMeasures
+
+ref table dim_data
+ref table dim_cliente
+ref table dim_produto
+ref table dim_representante
+ref table dim_filial
+ref table fato_vendas
+ref table fato_metas
+ref table fato_estoque
+ref table _Medidas
