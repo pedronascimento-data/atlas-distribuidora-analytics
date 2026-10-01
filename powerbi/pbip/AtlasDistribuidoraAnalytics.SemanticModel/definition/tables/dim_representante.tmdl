@@ -1,0 +1,54 @@
+table dim_representante
+	column representante_key
+		dataType: int64
+		isHidden
+		isKey
+		summarizeBy: none
+		sourceColumn: representante_key
+
+	column id_representante_origem
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: id_representante_origem
+
+	column codigo_representante
+		dataType: string
+		summarizeBy: none
+		sourceColumn: codigo_representante
+
+	column representante
+		dataType: string
+		summarizeBy: none
+		sourceColumn: representante
+
+	column supervisor
+		dataType: string
+		summarizeBy: none
+		sourceColumn: supervisor
+
+	column gerente
+		dataType: string
+		summarizeBy: none
+		sourceColumn: gerente
+
+	column status_representante
+		dataType: string
+		summarizeBy: none
+		sourceColumn: status_representante
+
+	hierarchy Comercial
+		level Gerente
+			column: gerente
+		level Supervisor
+			column: supervisor
+		level Representante
+			column: representante
+
+	partition dim_representante = m
+		mode: import
+		source =
+			let
+				Source = MySQL.Database(#"Server", #"Database", [Query="SELECT * FROM dim_representante"])
+			in
+				Source
