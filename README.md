@@ -238,8 +238,9 @@ Depois, no MySQL:
 - [x] Tema, layout e configuração do modelo Power BI
 - [x] Scaffold PBIP/TMDL/PBIR versionável
 - [x] Visão Executiva em PBIR (autoria de 10 visuais)
-- [ ] Validar e refinar Visão Executiva no Power BI Desktop
-- [ ] Materializar as demais páginas em PBIR
+- [x] Performance Comercial em PBIR (autoria de 8 visuais)
+- [ ] Validar e refinar páginas no Power BI Desktop
+- [ ] Materializar Clientes, Produtos e Estoque em PBIR
 - [ ] Screenshots e apresentação executiva final
 - [ ] Apresentação executiva dos insights
 

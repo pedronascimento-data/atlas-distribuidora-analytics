@@ -72,19 +72,17 @@ As tabelas utilizam **Import mode** e Power Query M com `MySQL.Database`.
 5. Atualize o modelo.
 6. Valide o faturamento contra `sql/06_validacoes_pipeline.sql`.
 7. Importe `../tema-atlas.json`.
-8. Monte os visuais usando `../campos-visuais.md`.
+8. Monte/revise os visuais usando `../campos-visuais.md`.
 
 ## Páginas
 
-As cinco páginas 1280 × 720 já existem no PBIR:
+As cinco páginas 1280 × 720 existem no PBIR:
 
-1. Visão Executiva
-2. Performance Comercial
-3. Clientes
-4. Produtos e Categorias
-5. Estoque
-
-Elas estão intencionalmente sem visuais nesta versão inicial. Os arquivos de visual devem ser gerados/validados pelo Power BI Desktop para evitar inserir PBIR inválido no repositório.
+1. Visão Executiva — **10 visuais PBIR**
+2. Performance Comercial — **8 visuais PBIR**
+3. Clientes — estrutura criada
+4. Produtos e Categorias — estrutura criada
+5. Estoque — estrutura criada
 
 ## Controle de versão
 
@@ -97,16 +95,25 @@ Arquivos locais e cache do Desktop não devem ser commitados:
 
 Depois de abrir e salvar o projeto pela primeira vez no Desktop, revise o diff gerado pelo Power BI antes de continuar a montagem visual.
 
-
 ## Implementação do relatório
 
-A página **Visão Executiva** já possui 10 definições `visual.json` versionadas no PBIR:
+### Visão Executiva
 
 - 6 cards;
 - 1 gráfico de linha;
 - 1 gráfico de colunas;
 - 2 gráficos de barras.
 
-Consulte [Implementação PBIR — Visão Executiva](../../docs/bi/06-visao-executiva-pbir.md).
+[Documentação da Visão Executiva](../../docs/bi/06-visao-executiva-pbir.md)
 
-**Status:** autoria PBIR concluída; renderização e QA no Power BI Desktop ainda pendentes.
+### Performance Comercial
+
+- 4 cards;
+- 1 ranking em barras;
+- 1 comparação faturamento x meta;
+- 1 evolução mensal;
+- 1 tabela detalhada da hierarquia comercial.
+
+[Documentação da Performance Comercial](../../docs/bi/07-performance-comercial-pbir.md)
+
+**Status geral:** autoria PBIR em andamento; renderização e QA no Power BI Desktop ainda pendentes.
