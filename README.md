@@ -1,5 +1,7 @@
 # Atlas Distribuidora Analytics
 
+[![Power BI Project QA](https://github.com/pedronascimento-data/atlas-distribuidora-analytics/actions/workflows/powerbi-qa.yml/badge.svg)](https://github.com/pedronascimento-data/atlas-distribuidora-analytics/actions/workflows/powerbi-qa.yml)
+
 Projeto de portfólio que simula a construção de uma solução **end-to-end de Dados e Business Intelligence** para uma distribuidora de materiais de construção.
 
 O projeto cobre o fluxo:
@@ -261,7 +263,7 @@ python python/eda_analysis.py
 - [x] Produtos e Categorias em PBIR (autoria de 9 visuais)
 - [x] Estoque em PBIR (autoria de 8 visuais)
 - [x] Todas as cinco páginas materializadas em PBIR
-- [x] QA estrutural automatizado para PBIP/PBIR/TMDL
+- [x] QA estrutural automatizado para PBIP/PBIR/TMDL — GitHub Actions validado
 - [ ] Validar e refinar páginas no Power BI Desktop
 - [ ] Screenshots e apresentação executiva final
 - [ ] Apresentação executiva dos insights
