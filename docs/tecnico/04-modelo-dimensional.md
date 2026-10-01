@@ -82,6 +82,7 @@ Atributos:
 - trimestre;
 - ano;
 - ano-mês;
+- ordem ano-mês (`YYYYMM`) para classificação cronológica;
 - dia da semana.
 
 ### dim_cliente
